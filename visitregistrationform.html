@@ -1,0 +1,8 @@
+    <div class="margin">
+    <div class="close" onClick="ClearOverlay()"><span class="link">close [x]</span></div>
+    <form id="registration" action="/submitregister"  method="post">
+      <input type="hidden" name="fromvisitlog" value=1>
+      {% include "registrationinnards.html" %}
+      <button type="submit" form="registration" value="Submit" class="submit">Submit</button>
+    </form>
+    </div>

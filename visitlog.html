@@ -1,0 +1,46 @@
+<html>
+ <head>
+    <script src="js/main.js" type="text/javascript"></script>
+    <script src="js/auto-complete.js" type="text/javascript"></script>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+
+  <body onLoad = "LoadEvents(visit=true, date = '{{ date }}')">
+    {% set active_page="visit" %}
+    {% include "standardheader.html" %}
+    <form id="visitlog" onsubmit="return VisitSubmit()" action="/submitvisit"  method="post">
+      <input type="date" id="date" name="date" class="date" value={{ date }} onChange="FillVisitTD(this.value)" >
+      <input type="hidden" id="householdid" name="householdid"  value={{ household.id }}>
+      <table style="width: 100%;">
+        <tr>
+          <td id="patroncell" class="visitlog">
+            {% for patron in household.patrons %}
+              <label>
+                <input type="checkbox" id="patron{{ patron.id }}" name="patron{{ patron.id }}">
+                <span style="width: 80%;">{{ patron.first }} {% if patron.last %}{{ patron.last }}{% endif %}</span>
+              </label> <br>
+            {% endfor %}
+          </td>
+          <td id="eventcell" class="visitlog">
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <input id="eventsuggest" type="text" name="eventsuggest" placeholder="More events..." style="width:80%;max-width:600px;outline:0">
+          </td>
+        </tr>
+      </table>
+      {% if household.tooold %}
+        <div class="error">It's been awhile since you've checked your <span class='link' onclick='LoadHouseholdFromVisit({{ household.id }})'>Household Information</span>, can you please look at it now? </div>
+      {% elif household.fix %}
+        <div class="error">We noticed some problems with your <span class='link' onclick='LoadHouseholdFromVisit({{ household.id }})'>Household Information</span>, can you please look at it now? </div>
+      {% endif %}
+      <button type="submit" form="visitlog" class="submit">Submit</button>
+      
+    </form>
+    <span class='link' onclick='LoadHouseholdFromVisit({{ household.id }})'>Edit Household Information</span>
+    {% include "standardfooter.html" %}
+    
+  </body>
+</html>

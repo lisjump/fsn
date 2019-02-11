@@ -1,0 +1,96 @@
+    <div class="close" onClick="ClearOverlay()"><span class="link">close [x]</span></div>
+    <form id="addevent" action="/adminsubmitevent"  method="post">
+      <input type="hidden" id="reload" name="reload">
+      <input type="hidden" id="applyrindex" name="applyrindex">
+      <div class="menubox">
+        <ul class="subtabbedmenu" id="eventmenu">
+            <li class="subactivetab" id="info" onclick="ChangeSubTab(this)">
+              <span>Info</span>
+            </li>
+            <li class="subtab" id="options" onclick="ChangeSubTab(this)">
+              <span>Options</span>
+            </li>
+        </ul>
+      </div>
+      
+      <div id="menuframe">
+        <table class="addeventmenu" id="infotable" name="infotable">
+          <tr>
+            <td class = "label" style="width: 20%;">
+              <label for = "address1">ID</label>
+            </td>
+            <td class = "id" style="width: 40%;">
+              {% if event.id %}<input type="hidden" name="id" id="id" value={{ event.id}}>{{ event.id}}{% endif %}
+            </td>
+            <td rowspan=5 class="infotablebuttons">
+              <label>
+                <input type="checkbox" id="archive" name="archive" {% if event.archive %} checked  {% endif %}">
+                <span>Archive</span>
+              </label>
+              <br>
+              <label>
+                <input type="checkbox" id="highlight" name="highlight" {% if event.highlight %} checked  {% endif %}">
+                <span>Highlight</span>
+              </label>
+              <br>
+              <label>
+                <input type="checkbox" id="alwaysshow" name="alwaysshow" {% if event.alwaysshow %} checked  {% endif %}">
+                <span>Always Show</span>
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td class = "label">
+              <label for = "name">Event Name:</label>
+            </td>
+            <td class = "textbox">
+              <input class="register" type="textbox" id="name" name="name" {% if event.name %} value = '{{ event.name}}'{% endif %}>
+            </td>
+          </tr>
+          <tr>
+            <td class = "label">
+              <label for = "instructor">Instructor:</label>
+            </td>
+            <td class = "textbox">
+              <input class="register" type="textbox" id="instructor" name="instructor" {% if event.instructor %} value = '{{ event.instructor}}'{% endif %}>
+            </td>
+          </tr>
+          <tr>
+            <td class = "label">
+              <label for = "cost">Cost:</label>
+            </td>
+            <td class = "textbox">
+              <input class="register" type="textbox" id="cost" name="cost" {% if event.cost %} value = '{{ event.cost}}'{% endif %}>
+            </td>
+          </tr>
+          <tr>
+            <td class = "label">
+              <label for = "description">Event Description:</label>
+            </td>
+            <td class = "textbox">
+              <textarea class="register" id="description" name="description" rows=4>{% if event.description %}{{ event.description}}{% endif %}</textarea>
+            </td>
+          </tr>
+        </table>
+      
+        <table class="addeventmenu" id="optionstable" name="optionstable" style="display:none">
+          <tr>
+            <td class="label">
+              <input class="button" id="newrecurrence" type="button" value="New Repeating Event" onclick="CreateRecurringTab('');" >    <br>
+            </td>
+          </tr>
+        </table>
+      </div>
+      
+      <br>
+      
+      <input class="button" id="instanceshowall" type="button" value="Show All" onclick="InstanceShowAll();" />    <br>
+    
+      <div id="sessionsdiv">
+      </div>
+     
+      <button  type="button" name='addrows' onClick = "LoadSession('new')" class="button">Add Session</button>  
+      <br>
+      <button type="submit" class="button">Submit</button>
+    </div>
+		 </form>

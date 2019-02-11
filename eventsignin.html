@@ -1,0 +1,97 @@
+
+<html>
+  <head>
+    <script src="js/main.js" type="text/javascript"></script>
+    <script src="js/auto-complete.js" type="text/javascript"></script>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+
+  <body>
+    {% set active_page="adminvisits" %}
+    {% include "adminheader.html" %}
+    <div class="white">{{instancesignin.name}}</div>
+    <form id="eventsignin" action="/submiteventsignin"  method="post">
+      {% if instancesignin.visitid %}
+        <input type="hidden" id="visitid" name="visitid"  value={{ instancesignin.visitid }}>
+      {% endif %}
+      <input type="hidden" id="date" name="date" class="date" value={{ instancesignin.date }}>
+      <input type="hidden" id="event{{ instancesignin.eventid }}" name="event{{ instancesignin.eventid }}"  value={{ instancesignin.eventid }}>
+      <input type="hidden" id="instance{{ instancesignin.eventid }}" name="instance{{ instancesignin.eventid }}"  value={{ instancesignin.instanceid }}>
+      <table style="width: 100%;">
+        {% for patron in instancesignin.patrons %}
+          <tr>
+            <td class="visitlog">
+              <label>
+                <input type="checkbox" id="patron{{ patron.id }}" name="patron{{ patron.id }}" checked>
+                <span style="width: 80%;">{% if patron.first %}{{ patron.first }}{% endif %} {% if patron.last %}{{ patron.last }}{% endif %}</span>
+              </label> <br>
+            </td>
+          </tr>
+        {% endfor %}
+        <tr>
+          <td id="patroncell">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input id="patronsuggest" autofocus type="text" name="patronsuggest" placeholder="Please select your name or household ID" style="width:100%;max-width:600px;outline:0">
+          </td>
+        </tr>
+      </table>
+
+      <button type="submit" form="eventsignin" class="submit">Submit</button>
+      
+    </form>
+
+    {% include "standardfooter.html" %}
+
+    <script>
+        var patrons = new autoComplete({
+            selector: '#patronsuggest',
+            minChars: 0,
+            source: function(term, suggest){
+                term = term.toLowerCase();
+                var choices = {{ patronlookup|safe }};
+                var suggestions = [];
+                for (i=0;i<choices.length;i++)
+                    if (~(choices[i][0]+' '+choices[i][1]).toLowerCase().indexOf(term)) suggestions.push(choices[i]);
+                suggest(suggestions);
+            },
+            renderItem: function (item, search){
+                search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&amp;');
+                var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
+                return '<div class="autocomplete-suggestion" patron="'+item[0]+'" houseid="'+item[1]+'" patronid="'+item[2]+'" data-val="'+search+'"> '+item[0].replace(re, "<b>$1</b>")+'</div>';
+            },
+            onSelect: function(e, term, item){
+                console.log('Item "'+item.getAttribute('patron')+' ('+item.getAttribute('houseid')+')" selected by '+(e.type == 'keydown' ? 'pressing enter' : 'mouse click')+'.');
+                document.getElementById('patronsuggest').value = "";
+                var patronlookup = {{ patronlookup|safe }};
+                for (i=0;i<patronlookup.length;i++)
+                    if (patronlookup[i][1] == item.getAttribute('houseid')) {
+                      var newcheck = document.createElement("INPUT");
+                      newcheck.type = "checkbox";
+                      newcheck.name = "patron" + patronlookup[i][2];
+                      newcheck.id = "patron" + patronlookup[i][2];
+                      
+                      if (patronlookup[i][2] == item.getAttribute('patronid')) {
+                        newcheck.checked = true;
+                      }
+
+                      var newlabel = document.createElement("LABEL");
+                      newlabel.style.width = "80%";
+                      newlabel.innerHTML = patronlookup[i][0];
+                      newlabel.className = "button"
+                      newlabel.htmlFor = "patron" + patronlookup[i][2];
+
+                      document.getElementById('patroncell').appendChild(newcheck);
+                      document.getElementById('patroncell').appendChild(newlabel);
+                      document.getElementById('patroncell').appendChild(document.createElement("BR"));
+                    }
+            }
+        });
+        
+
+    </script>
+    
+  </body>
+</html>

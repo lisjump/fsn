@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+    Last stable copy of stuff is here: <a class="link" href="http://v6.family-strengths-network.appspot.com">v6.family-strengths-network.appspot.com</a> <br><br>
+  
+    <strong>VISITS</strong>
+    <table id="visitlist" class="eventlist">
+      <tr>
+	      <th class="datasheet">V. ID</th>
+		    <th class="datasheet">H. ID</th>
+		    <th class="datasheet">Patrons</th>
+		    <th class="datasheet">Events</th>
+        <th class="datasheet">PW</th>
+      </tr>
+      {% for visit in visits %}
+        <tr class="{{ loop.cycle('odd', 'even') }}">
+          <td><span class='blacklink' id='{{ visit.vid }}' onclick='LoadVisit({{ visit.vid }}, "{{ visit.date }}");'>{{ visit.vid }} </span></td>
+          {% if visit.hid == 0 %}
+            <td></td>          
+          {% else %}
+            <td><span class='blacklink' id='{{ visit.hid }}' onclick='LoadHousehold({{ visit.hid }})'>{{ visit.hid }}</span></td>
+          {% endif %}
+          <td>
+            {% for patron in visit.patronnames %}
+              {{ patron }}: {{visit.patronnames[patron]}} <br>
+            {% endfor %}
+          </td>
+          <td>
+            {% for event in visit.eventnames %}
+            {{ event }}: {{visit.eventnames[event]}} <br>
+            {% endfor %}
+          </td>
+          {% if visit.hid == 0 %}
+            <td></td>          
+          {% else %}
+            <td>
+              {% if visit.picturewaiver == 0 %}
+                ?
+              {% elif visit.picturewaiver == 1 %}
+                Y
+              {% elif visit.picturewaiver == 2 %}
+                N
+              {% endif %}
+            </td>
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </table>
+  
+      
+    <br><br><strong>HOUSEHOLDS</strong>
+    <table id="visitlist" class="eventlist">
+      <tr>
+		    <th class="datasheet">ID</th>
+		    <th class="datasheet">Created</th>
+		    <th class="datasheet">Patrons</th>
+      </tr>
+      {% for household in households %}
+        <tr class="{{ loop.cycle('odd', 'even') }}">
+          <td><span class='blacklink' id='{{ household }}' onclick='LoadHousehold({{ household }})'>{{ household }}</span></td>
+          <td>{{ households[household].created }}</td>
+          <td>
+            {% for patron in households[household].patrons %}
+              {{ patron.id }}: {{ patron.first }} {{ patron.last }}<br>
+            {% endfor %}
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  

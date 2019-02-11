@@ -1,0 +1,4 @@
+cron:
+- description: "Monthly Reccurrence"
+  url: /updaterecurrences
+  schedule: 1 of month 00:00

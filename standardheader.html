@@ -1,0 +1,38 @@
+  <div class="menubox">
+    {% set navigation_bar = [
+      ('/', 'home', 'Home'),
+      ('/register', 'register', 'Register'),
+      ('/visitlog', 'visit', 'Visit Log'),
+      (session.loginurl, 'login', session.logintext),
+    ] -%}
+<!-- 
+      ('/books', 'books', 'Books'),
+      ('/toys', 'toys', 'Toys'),
+ -->
+    {% set admin_bar = [
+      ('/adminhome', 'adminhome', 'Home'),
+    ] -%}
+
+    {% set active_page = active_page|default('home') %}
+
+    <ul class="tabbedmenu">
+      {% for href, id, caption in navigation_bar %}
+        <li class={% if id == active_page %}"activetab"{% else %}"tab"{% endif %}>
+          <a href="{{ href|e }}">{{ caption|e }}</a>
+        </li>
+      {% endfor %}
+      {% if session.admin %}
+        {% for href, id, caption in admin_bar %}
+          <li class={% if id == active_page %}"activetab"{% else %}"tab"{% endif %}>
+            <a href="{{ href|e }}">{{ caption|e }}</a>
+          </li>
+        {% endfor %}
+        <li class="tab" onclick="Overlay('/adminlogin', '')">
+          <span class="menu"> Admin </span>
+        </li>      
+      {% endif %}
+    </ul>
+
+  </div>
+  <div class='margin'>
+

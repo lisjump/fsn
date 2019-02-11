@@ -1,0 +1,26 @@
+
+<html>
+  <head>
+    <script src="js/main.js" type="text/javascript"></script>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+
+  <body onLoad = "LoadPatrons()">
+    {% set active_page="adminpatrons" %}
+    {% include "adminheader.html" %}
+    
+    <table id="patronlist" class="patronlist">
+      <tr>
+	      <th class="datasheet" onclick="SortTable(sortby='compareID'); FillPatronTable()">ID</th>
+		    <th class="datasheet" onclick="SortTable(sortby='compareHID'); FillPatronTable()">H ID</th>
+        <th class="datasheet" onclick="SortTable(sortby='compareFirst'); FillPatronTable()">First</th>
+        <th class="datasheet" onclick="SortTable(sortby='compareLast'); FillPatronTable()">Last</th>
+      </tr>
+      <tr>
+        <td class="odd" colspan="4">Loading....</td>
+      </tr>
+    </table>
+
+    {% include "standardfooter.html" %}
+  </body>
+</html>

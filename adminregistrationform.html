@@ -1,0 +1,37 @@
+    <div class="margin">
+    <div class="close" onClick="ClearOverlay()"><span class="link">close [x]</span></div>
+    <form id="registration" action="/submitregister"  method="post">
+      {% include "registrationinnards.html" %}
+      
+      <input type="hidden" name="adminpatron" value=1>
+      <table class = "adminregistration">
+        <tr>
+          <td class = "textbox" width='25%'>
+            <label>
+              <input type="checkbox" id="fix" name="fix" {% if household.fix %} checked  {% endif %}>
+              <span>Fix Me</span>
+            </label>
+          </td>
+          <td class = "textbox" width='25%'>
+            <label>
+              <input type="checkbox" id="library" name="library" {% if household.library %} checked  {% endif %}>
+              <span>Library</span>
+            </label>
+          </td>
+          <td class = "textbox" width='25%'>
+            <label>
+              <span>Sponsor</span> <br>
+              <input type="date" id="sponsor" name="sponsor" {% if household.sponsor %} value = {{household.sponsor}}  {% endif %}>
+            </label>
+          </td>
+          <td class = "textbox" width='25%'>
+            Add Existing Patron: <br>
+            <input name ='addpatron' type='text' placeholder='Patron ID'></input>
+          </td>
+        </tr>
+      </table>
+
+      
+      <button type="submit" form="registration" value="Submit" class="submit">Submit</button>
+    </form>
+    </div>

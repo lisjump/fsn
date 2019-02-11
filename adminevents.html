@@ -1,0 +1,31 @@
+
+<html>
+  <head>
+    <script src="js/main.js" type="text/javascript"></script>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+
+  <body onLoad = "LoadEvents(visit=false, date='', visitid = '', reload='{{reload}}');">
+    {% set active_page="adminevents" %}
+    {% include "adminheader.html" %}
+    <input class="button" id="showall" type="button" value="Show All" onclick="EventShowAll();" />    <br>
+    <br>
+    
+    <table id="eventlist" class="eventlist">
+      <tr>
+	      <th class="datasheet" onClick="SortTable(sortby='compareID'); FillEventTable()">ID</th>
+		    <th class="datasheet" onClick="SortTable(sortby='compareName'); FillEventTable()">Event Name</th>
+		    <th class="datasheet" onClick="SortTable(sortby='compareInstructor'); FillEventTable()">Instructor</th>
+		    <th class="datasheet" onClick="SortTable(sortby='compareCost'); FillEventTable()">Cost</th>
+		    <th class="datasheet">Expand <span id="expandall" onclick='ExpandAll(this)'>[+]</span></th>
+      </tr>
+      <tr>
+        <td class="odd" colspan="4">Loading....</td>
+      </tr>
+    </table>
+    
+    <button type="button" onClick="Overlay('/adminaddevent', 'event')" class="submit">Add Event</button>
+
+    {% include "standardfooter.html" %}
+  </body>
+</html>

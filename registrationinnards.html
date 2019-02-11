@@ -1,0 +1,212 @@
+
+      <table class = "edit" style="width: 80%;">
+        <tr>
+          <td class = "label" style="width: 20%;">
+            <label for = "address1">ID</label>
+          </td>
+          <td class = "id">
+            {% if household.id %}<input type="hidden" name="id" value={{ household.id}}>{{ household.id}}{% endif %}
+          </td>
+          <td></td>           
+          <td></td>           
+        </tr>
+        <tr>
+          <td class = "label">
+            <label for = "address1">Address 1</label>
+          </td>
+          <td class = "textbox">
+            <input tabindex="1" class="register" type="textbox" id="address1" name="address1" {% if household.address1 %} value = '{{ household.address1}}'{% endif %}>
+          </td>
+          <td class = "label">
+            <label for = "phone">Phone</label>
+          </td>
+          <td class = "textbox">
+            <input tabindex="6" class="register" type="tel" id="phone" name="phone" {% if household.phone %} value = '{{ household.phone}}'{% endif %}>
+          </td>
+        </tr>
+        <tr>
+          <td class = "label">
+            <label for = "address2">Address 2</label>
+          </td>
+          <td class = "textbox">
+            <input tabindex="2" class="register" type="textbox" id="address2" name="address2" {% if household.address2 %} value = '{{ household.address2}}'{% endif %}>
+          </td>
+          <td class = "label">
+            <label for = "email">Email</label>
+          </td>
+          <td class = "textbox">
+            <input tabindex="7" class="register" type="email" id="email" name="email" {% if household.email %} value = '{{ household.email}}'{% endif %}>
+          </td>
+        </tr>
+        <tr>
+          <td class = "label">
+            <label for = "city">City</label>
+          </td>
+          <td class = "textbox">
+            <input tabindex="3" class="register" type="textbox" id="city" name="city"  value = {% if household.city %}'{{ household.city}}'{% else %} "Los Alamos" {% endif %}>
+          </td>
+          <td class = "label">
+            <label for = "email2">Email2</label>
+          </td>
+          <td class = "textbox">
+            <input tabindex="8" class="register" type="email" id="email2" name="email2" {% if household.email2 %} value = '{{ household.email2}}'{% endif %}>
+          </td>
+        </tr>
+        <tr>
+          <td class = "label">
+            <label for = "state">State</label>
+          </td>
+          <td class = "textbox">
+            <input tabindex="4" class="register" type="textbox" id="state" name="state"  value = {% if household.state %}'{{ household.state}}'{% else %} "NM" {% endif %}>
+          </td>
+          <td class = "label">
+            <label for = "income">Household Income</label>
+          </td>
+          <td class = "textbox">
+            <select tabindex="9" class="register" type="textbox" id="income" name="income">
+              {% for income in incomes %}
+                {% if income.id|string() == household.income|string() %}
+                  <option value={{ income.id }} selected>{{ income.category }}</option>
+                {% elif income.display %}
+                  <option value={{ income.id }}>{{ income.category }}</option>                  
+                {%endif %}
+              {% endfor %}
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class = "label">
+            <label for = "zip">Zip</label>
+          </td>
+          <td class = "textbox">
+            <input tabindex="5" class="register" type="textbox" id="zip" name="zip"  value = {% if household.zip %}'{{ household.zip}}'{% else %} "87544" {% endif %}>
+          </td>
+        </tr>
+      </table>
+     
+      <br>
+  
+      <table class="datasheet" cellpadding="0" cellspacing="0" id="patrontable" style="width: 100%;">
+        <thead>
+          <th class="datasheet" style="width: 2%;">ID</th>
+          <th class="datasheet" style="width: 10%;" nowrap="nowrap">First</th>
+          <th class="datasheet" style="width: 10%;" nowrap="nowrap">Last</th>
+          <th class="datasheet" style="width: 5%;" nowrap="nowrap">Birthyear</th>
+          <th class="datasheet" style="width: 5%;" nowrap="nowrap">Gender</th>
+          <th class="datasheet" style="width: 10%;" nowrap="nowrap">Ethnicity</th>
+          <th class="datasheet" style="width: 5%;" nowrap="nowrap">&#10006;</th>            
+        </thead>
+        <tbody>
+
+          {% macro patronrow(patronid = "", patronfirst = "", patronlast = "", patronbirthyear = "", patrongender = "", patronethnicity = "", dontdisplay = false) -%}
+              <tr id="patronrow" class="datasheet" {% if dontdisplay %} style="display:none;" {% endif %}>
+                <th class="datasheet" >{{ patronid }}</th>
+                <input name="patronid" type="hidden" value={{ patronid }}>
+                <input name="delete" type="hidden" value="False">
+                <td><input class="normalrow" name = "first" {% if patronfirst %} value="{{ patronfirst }}" {% endif %} type="text"></td>
+                <td><input class="normalrow" name = "last" {% if patronlast %} value="{{ patronlast }}" {% endif %} type="text"></td>
+                <td>
+                  <select type="textbox" id="birthyear" name="birthyear">
+                    <option value="select"  selected >Select</option>
+                    {% for i in range(0, 100) %}
+                      {% set year = currentyear - i %}
+                        <option value={{ year }} {% if year|string() == patronbirthyear|string() %} selected {% endif %}>{{ year }}</option>
+                    {% endfor %}
+                  </select>
+                </td>
+                <td>
+                  <select type="textbox" id="gender" name="gender">
+                    <option value="select"  selected >Select</option>
+                    {% for gender in genders %}
+                      {% if gender.id|string() == patrongender|string() %}
+                        <option value={{ gender.id }} selected>{{ gender.category }}</option>
+                      {% elif gender.display %}
+                        <option value={{ gender.id }}>{{ gender.category }}</option>                  
+                      {%endif %}
+                    {% endfor %}
+                  </select>
+                </td>
+                <td>
+                  <select type="textbox" id="ethnicity" name="ethnicity">
+                    <option value="select"  selected >Select</option>
+                    {% for ethnicity in ethnicities %}
+                      {% if ethnicity.id|string() == patronethnicity|string() %}
+                        <option value={{ ethnicity.id }} selected>{{ ethnicity.category }}</option>
+                      {% elif ethnicity.display %}
+                        <option value={{ ethnicity.id }}>{{ ethnicity.category }}</option>                  
+                      {%endif %}
+                    {% endfor %}
+                  </select>
+                </td>
+                <td>
+                  <span name='x' class="cursor" onClick = "DeletePatron(this)">&#10006;</span>
+                </td>
+              </tr>
+          {%- endmacro %}
+
+          {{ patronrow(dontdisplay = true) }}
+          
+          {% for patron in household.patrons %}
+            {{ patronrow(patronid = patron.id, patronfirst = patron.first, patronlast = patron.last, patronbirthyear = patron.birthyear, patrongender = patron.gender, patronethnicity = patron.ethnicity) }}
+          {% endfor %}
+          
+          {% for i in range(0, 2) %}
+            {{ patronrow() }}
+          {% endfor %}
+        
+        </tbody>
+      </table>
+     
+     <br>   
+     
+     <button  type="button" name='addrows' onClick = "AddRows('patrontable', 2)" class="submit">Add Rows</button>  
+     
+     <br>
+      
+      <table class = "edit" style="width: 100%;">
+        <tr>
+          <td class = "label" style="width: 30%;">
+            <label for = "photo">I give permission to Family Strengths Network to use my photograph and my child(ren)'s photograph for it's website, newsletter, and other publicity purposes.</label>
+          </td>
+          <td class = "textbox">
+            {% for yesno in yesnos %}
+              {% if yesno.display %}
+                <label>
+                  <input type="radio" id="photo{{ yesno.id }}" name="photo" value="{{ yesno.id }}" {% if yesno.id|string() == household.picturewaiver|string() %} checked {% endif %}>
+                  <span>{{ yesno.category }}<span>
+                </label>
+              {% endif %}
+            {% endfor %}
+          </td>
+          <td class="communication" style="width: 30%;" rowspan="2">
+            Communication Preferences <br>
+            {% for communication in communications %}
+              {% if communication.display %}
+                <label>
+                  <input type="checkbox" id="communication{{ communication.id }}" name="communication{{ communication.id }}" {% if communication.id in household.communicationids %} checked  {% endif %}">
+                  <span style="width: 80%;">{{ communication.name }}</span>
+                </label>
+              {% endif %}
+            {% endfor %}
+          </td
+        </tr>
+        <tr>
+          <td class = "label">
+            <label for = "lanl">Someone in the household is employed by LANL</label>
+          </td>
+          <td class = "textbox">
+            {% for yesno in yesnos %}
+              {% if yesno.display %}
+                <label>
+                  <input type="radio" id="lanl{{ yesno.id }}" name="lanl" value="{{ yesno.id }}" {% if yesno.id|string() == household.lanl|string() %} checked {% endif %}>
+                  <span>{{ yesno.category }}</span>
+                </label>
+              {%endif %}
+            {% endfor %}
+          </td>
+        </tr>
+      </table>
+      
+      <br>
+      
+		

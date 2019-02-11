@@ -1,0 +1,28 @@
+  <div class="menubox">
+    {% set navigation_bar = [
+      ('/adminhome', 'adminhome', 'Home'),
+      ('/adminpatrons', 'adminpatrons', 'Patrons'),
+      ('/adminevents', 'adminevents', 'Events'),
+      ('/adminvisits', 'adminvisits', 'Visits'),
+      ('/adminbooks', 'adminbooks', 'Books'),
+      ('/admintoys', 'admintoys', 'Toys'),
+      ('/adminvolunteer', 'adminvolunteer', 'Volunteer'),
+      ('/register', 'register', 'Register'),
+      ('/visitlog', 'visit', 'Visit Log'),
+      (session.loginurl, 'login', session.logintext),
+      ('/', 'adminleave', 'Leave Admin')
+    ] -%}
+
+    {% set active_page = active_page|default('homeAdmin') %}
+
+    <ul class="tabbedmenu">
+      {% for href, id, caption in navigation_bar %}
+        <li class={% if id == active_page %}"activetab"{% else %}"tab"{% endif %}>
+          <a class=menu href="{{ href|e }}">{{ caption|e }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+  </div>
+  <div class='margin'>
+

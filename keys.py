@@ -1,0 +1,10 @@
+CLOUDSQL_PROJECT = 'family-strengths-network'
+CLOUDSQL_REGION = 'us-central1'
+CLOUDSQL_INSTANCE = 'fsn'
+CLOUDSQL_USER = 'root'
+CLOUDSQL_PASSWD = 'families18'
+CLOUDSQL_HOST = "146.148.43.22"
+CLOUDSQL_DB = "main"
+AUTHORIZED_USERS = ["lis@bibliosaur.com", "cariefanning@msn.com", "familystrengthsnetwork@gmail.com"]
+ADMINPASS = "families18"
+STATICEVENTS = ["Family Resource Center", "Beth Ladino Library", "Toy Lending Library"]

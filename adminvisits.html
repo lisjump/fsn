@@ -1,0 +1,28 @@
+
+<html>
+  <head>
+    <script src="js/main.js" type="text/javascript"></script>
+    <script src="js/auto-complete.js" type="text/javascript"></script>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+
+  <body onLoad = "LoadVisits()">
+    {% set active_page="adminvisits" %}
+    {% include "adminheader.html" %}
+    
+    <table id="visitlist" class="eventlist">
+      <tr>
+	      <th class="datasheet" onClick="SortTable(sortby='compareVID'); FillVisitTable()">V. ID</th>
+		    <th class="datasheet" onClick="SortTable(sortby='compareDate'); FillVisitTable()">Date</th>
+		    <th class="datasheet" onClick="SortTable(sortby='compareHID2'); FillVisitTable()">H. ID</th>
+		    <th class="datasheet">Patrons</th>
+		    <th class="datasheet">Events</th>
+      </tr>
+      <tr>
+        <td class="odd" colspan="4">Loading....</td>
+      </tr>
+    </table>
+    
+    {% include "standardfooter.html" %}
+  </body>
+</html>

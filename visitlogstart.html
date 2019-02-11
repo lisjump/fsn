@@ -1,0 +1,55 @@
+<html>
+ <head>
+    <script src="js/main.js" type="text/javascript"></script>
+    <script src="js/auto-complete.js" type="text/javascript"></script>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+
+  <body>
+    {% set active_page = "visit" %}
+    {% include "standardheader.html" %}
+    
+    <form class="pure-form" onsubmit="return checksubmit()" style="margin:30px 0 40px" action='{{ action }}'  method="post">
+        <input id="patronsuggest" autofocus type="text" name="patronsuggest" placeholder="Please select your name or household ID" style="width:100%;max-width:600px;outline:0">
+        <input id="householdid" type="hidden" name="householdid">
+        <button type="submit" class="button" id="submit">Go!</button>
+    </form>
+
+    {% include "standardfooter.html" %}
+    <script>
+        var patrons = new autoComplete({
+            selector: '#patronsuggest',
+            minChars: 0,
+            source: function(term, suggest){
+                term = term.toLowerCase();
+                var choices = {{ patronlookup|safe }};
+                var suggestions = [];
+                for (i=0;i<choices.length;i++)
+                    if (~(choices[i][0]+' '+choices[i][1]).toLowerCase().indexOf(term)) suggestions.push(choices[i]);
+                suggest(suggestions);
+            },
+            renderItem: function (item, search){
+                search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&amp;');
+                var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
+                return '<div class="autocomplete-suggestion" patron="'+item[0]+'" houseid="'+item[1]+'" data-val="'+search+'"> '+item[0].replace(re, "<b>$1</b>")+'</div>';
+            },
+            onSelect: function(e, term, item){
+                console.log('Item "'+item.getAttribute('patron')+' ('+item.getAttribute('houseid')+')" selected by '+(e.type == 'keydown' ? 'pressing enter' : 'mouse click')+'.');
+                document.getElementById('patronsuggest').value = item.getAttribute('patron');
+                document.getElementById('householdid').value = item.getAttribute('houseid');
+            }
+        });
+        
+        function checksubmit(){
+          if (document.getElementById('householdid').value) {
+            return true;
+          } else {
+            alert("Please select a household")
+            return false;
+          }
+        }
+
+
+    </script>
+  </body>
+</html>

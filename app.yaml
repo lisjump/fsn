@@ -1,0 +1,34 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+# [START handlers]
+handlers:
+- url: /stylesheets
+  static_dir: stylesheets
+
+- url: /scripts
+  static_dir: scripts
+
+- url: /js
+  static_dir: js
+
+- url: /.*
+  script: main.app
+
+- url: /updaterecurrences
+  script: main.app
+  login: admin
+
+# [END handlers]
+
+# [START libraries]
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest
+- name: MySQLdb
+  version: latest
+# [END libraries]
+

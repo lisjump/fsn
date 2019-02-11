@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <script src="js/main.js" type="text/javascript"></script>
+    <script src="js/auto-complete.js" type="text/javascript"></script>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+
+  <body>
+    {% set active_page="adminhome" %}
+    {% include "adminheader.html" %}
+    
+    <div class="white">
+
+    {% include "adminhomeinnards.html" %}
+      
+    <br><br><strong>EVENTS</strong>
+    <table id="visitlist" class="eventlist">
+      <tr>
+	      <th class="datasheet">ID</th>
+	      <th class="datasheet">Incident</th>
+		    <th class="datasheet">Event Name</th>
+      </tr>
+      {% for event in events %}
+        <tr class="{{ loop.cycle('odd', 'even') }}">
+          <td>{{ event.id }}</td>
+          <td>
+            {% for instance in event.instances %}
+              {{ instance.id }}{% if instance.name %}: {{ instance.name }}{% endif %} (<a href="eventsignin?iid={{ instance.id }}"> Sign In Sheet </a>)<br>
+            {% endfor %}
+          </td>
+          <td>{{ event.name }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  
+    {% include "standardfooter.html" %}
+    
+    </div>
+
+  </body>
+</html>

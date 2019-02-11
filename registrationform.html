@@ -1,0 +1,37 @@
+<html>
+ <head>
+    <script src="js/main.js" type="text/javascript"></script>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+
+  <body>
+    {% set active_page="register" %}
+    {% include "standardheader.html" %}
+    <form id="registration" onsubmit="return RegisterSubmit()" action="/submitregister"  method="post">
+      {% include "registrationinnards.html" %}
+
+      {% if household.library or household.sponsor %}
+      <table class = "adminregistration">
+        {% if household.library %}
+        <tr>
+          <td class = "textbox">
+            You have been approved to check out toys and books from our lending libraries.
+          </td>
+        </tr>
+        {% endif %}
+        {% if household.sponsor %}
+        <tr>
+          <td class = "textbox">
+            Your sponsorship expires/d on  {{ household.sponsor }} 
+          </td>
+        </tr>
+        {% endif %}
+      </table>
+      {% endif %}
+      <div class="error" id="submiterrors"></div>
+      <button id="submitbutton" type="submit" form="registration" value="Submit" class="submit">Submit</button>
+    </form>
+    {% include "standardfooter.html" %}
+    
+  </body>
+</html>

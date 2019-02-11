@@ -1,0 +1,39 @@
+    <div class="margin">
+    <div class="close" onClick="ClearOverlay()"><span class="link">close [x]</span></div>
+    <form id="visitlog" onsubmit="return VisitSubmit()" action="/adminsubmitvisit"  method="post">
+      <input type="date" id="date" name="date" class="date" value={{ date }} onChange="FillVisitTD(this.value)" >
+      <input type="hidden" id="householdid" name="householdid"  value={{ household.id }}>
+      <input type="hidden" id="visitid" name="visitid"  value={{ visit.id }}>
+      <table>
+        <tr>
+          <td id="patroncell" class="visitlog">
+            {% for patron in household.patrons %}
+              <label>
+                <input type="checkbox" id="patron{{ patron.id }}" name="patron{{ patron.id }}" {% if patron.id in visit.patronids %} checked {% endif %}>
+                <span style="width: 80%;">{{ patron.first }} {{ patron.last }}</span>
+              </label>
+            {% endfor %}
+          </td>
+          <td id="eventcell" class="visitlog">
+          </td>
+        <tr>
+          <td></td>
+          <td>
+            <input id="eventsuggest" type="text" name="eventsuggest" placeholder="More events..." style="width:80%;max-width:600px;outline:0">
+          </td>
+        </tr>
+      </table>
+      <label>
+        <input type="checkbox" id="deletevisit" name="deletevisit">
+        <span>DELETE</span>
+      </label>
+      <br>
+      <button type="submit" form="visitlog" class="submit">Submit</button>
+    </form>
+    </div>    
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    alert("DOM fully loaded and parsed");
+  });
+</script>

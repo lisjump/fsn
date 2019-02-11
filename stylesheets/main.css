@@ -1,0 +1,500 @@
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: 'EauSansBook', Geneva, Verdana, Helvetica, Arial, sans-serif;
+  font-weight: normal;  
+  background-color: #316734;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ------------------ Universal Elements --------------------*/
+
+.right {
+  float:right;
+}
+
+/* ------------------ Buttons and Form Elements --------------------- */
+
+select {
+  width:100%;
+}
+
+/* 
+input[type=checkbox], input[type=radio]{
+  display:none;
+}
+
+ */
+input.date {
+  margin: 0px 3%;
+  border: 1px solid black;
+  background: #E5E8C2;
+  border-radius: 5px;
+  color:black;  
+}
+
+input[type=checkbox] +  span, 
+input[type=radio] +  span, 
+input[type=checkbox] + span, 
+input[type=radio] + span, 
+.button, .buttonselected, 
+button {
+  background-color: #A33B20;
+  border: 1px solid #A33B20;
+  color: white;
+  padding: 10px 20px;
+  margin: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-shadow: 0px 0px 1px black;
+  font-family:inherit;
+  font-size:inherit;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+buttonhighlight {
+  background-color: #E07626;
+  border: 1px solid white;
+  color: white;
+  padding: 10px 20px;
+  margin: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-shadow: 0px 0px 1px black;
+  font-family:inherit;
+  font-size:inherit;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+input[type=checkbox]:checked + label, 
+input[type=checkbox]:hover + label:hover, 
+input[type=radio]:checked + label, 
+input[type=radio]:hover + label:hover,
+input[type=checkbox]:checked + span, 
+input[type=checkbox]:hover + span:hover, 
+input[type=radio]:checked + span, 
+input[type=radio]:hover + span:hover,
+.button:hover,
+button:hover {
+   background: #E07626;
+   text-decoration: none;
+   border: 1px solid white;  
+   font-weight: bold;
+}
+
+button.submit {
+  background: #E07626;
+  border-radius: 5px;
+}
+
+form.login {
+  margin: 0 auto;
+  width: 250px;
+}
+
+input[type=checkbox].ignore:checked + label, 
+input[type=checkbox].ignore:hover + label:hover, 
+label.ignore, 
+label.ignore:hover {
+  background: #316734;
+  border: none;
+  font-weight: regular;
+}
+
+/* ----------------- Table Elements --------------------- */
+
+td {
+  text-align: center;
+}
+
+table.datasheet{
+	width:100%;
+	padding:0px;
+}
+
+th.datasheet, th.sessiondatasheet {
+	padding:3px;
+	background-color:#7FA951;
+	border-top:1px solid #81B784;
+	border-left:1px solid #81B784;
+	border-right:1px solid #316734;
+	border-bottom:1px solid #316734;
+	color:white;
+	font-weight:bold;
+  text-shadow: 0px 0px 1px black;
+}
+
+th.sessiondatasheet {
+	background-color:#E07626;
+}
+
+tr.datasheet {
+	vertical-align:middle;
+	background-color:white;
+}
+
+tr.hiderow {
+style="display:none;"
+}
+
+.normalrow { 
+  color: black;
+}
+
+.deletedrow {
+  color: red;
+}
+
+.datasheet td {
+	padding:2px;
+	border-right:1px solid #316734;
+	border-bottom:1px solid #316734;
+	background-color:white;
+	height: 2em;
+}
+
+.datasheet td input, textarea{
+	border:0px none;
+	width:100%;
+	height:100%;
+	font-family:inherit;
+	font-size: 85%;
+}
+
+
+.datasheet select {
+	font-family:inherit;
+	font-size:inherit;
+}
+
+td.label {
+  border:none;
+  color:white;
+  text-align:right;
+  vertical-align:middle;
+  padding:5px;
+  text-shadow: 0px 0px 1px black;
+}
+
+td.response {
+  border:none;
+  color:white;
+  text-align:left;
+  vertical-align:top;
+  padding:5px;
+}
+
+td.id {
+  border:none;
+  color:white;
+  text-align:left;
+  vertical-align:top;
+  padding:5px;
+  text-shadow: 0px 0px 1px black;
+}
+
+td.textbox {
+  border:none;
+  text-align:left;
+  vertical-align:middle;
+  padding:5px;
+  white-space: nowrap;
+  width: 1%;
+  color: white;
+}
+
+td.communication {
+  padding:15px 0px;
+  border:1px solid white; 
+  color: white;
+}
+
+table.adminregistration {
+  margin:15px 15px;
+  padding:15px 15px;
+  border:1px solid white; 
+  color: white;
+  width: 100% - 30px;
+}
+
+table.communications td{
+  color:white;
+  text-align:left;
+  vertical-align:middle;
+}
+
+table.patronlist {
+	width:100%;
+	padding:0px;
+}
+
+table.eventlist {
+	width:100%;
+	padding:0px;
+}
+
+table.eventinstance, table.eventsession {
+  margin: 20 auto;
+  max-width: 95%;
+}
+
+tr.odd {
+  background-color: white;
+  color: black;
+}
+
+tr.even {
+  background-color:#E5E8C2;
+  color: black;
+}
+
+td.visitlog {
+	width:50%;
+  vertical-align:top;
+}
+
+table.addeventmenu {
+  border:1px solid white; 
+  margin: auto;
+	width: 95%;
+  border-radius: 5px;
+}
+/* ------------------- Divs and Spans -----------------------------*/
+
+div.error {
+  color: yellow;
+  margin: 15px 10px;
+  padding: 15px 10px;
+  text-shadow: 0px 0px 1px black;
+}
+
+div.margin {
+  margin: 15px 10px;
+  padding: 15px 10px;
+}
+
+div.white {
+  color: white;
+}
+
+div.overlay {
+  background-color: #000;
+  opacity: .7;
+  filter: alpha(opacity=70);
+  position: fixed; top: 0; left: 0;
+  width: 100%; 
+  height: 100%; 
+  z-index: 10;
+  overflow-y: auto;
+}
+
+div.overlayform {
+  background-color: #316734;
+  position: fixed; top: 20%; left: 20%; right: 20%; bottom: 20%;
+  z-index: 11;
+}
+
+div.patronoverlayform, div.visitoverlayform {
+  background-color: #316734;
+  position: fixed; top: 5%; left: 5%; right: 5%;
+  z-index: 11;
+  overflow-y: auto;
+  max-height: 90%;
+}
+
+div.eventoverlayform {
+  background-color: #316734;
+  position: fixed; top: 5%; left: 5%; right: 5%;
+  z-index: 11;
+  overflow-y: auto;
+  max-height: 90%;
+}
+
+div.login {
+  padding: 15px 10px;
+  color: white;
+}
+
+div.close{
+  text-align: right;
+}
+
+span.cursor {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/* ------------------ tabbed menu --------------------- */
+
+div.menubox {
+  width: 100%;
+  background-color: #E5E8C2;
+  margin:0;
+  border-bottom: 1px solid black;
+}
+
+ul.tabbedmenu{
+  text-align: left;
+  padding: 20px 5px 4px 15px;
+  margin: 0px;
+  border: none;
+  background: #E5E8C2;
+  width = 100%;
+}
+
+li.tab{
+  display: inline;
+  list-style-type: none;
+  padding: 5px 10px;
+  border: 1px solid black;
+  background: #7FA951;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  z-index:0;
+  margin: 0px 0px;
+	font-weight:bold;
+}
+
+li.activetab{
+  display: inline;
+  list-style-type: none;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-bottom:  1px solid #316734;
+  background: #316734;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  z-index:11;
+  margin: 0px 0px;
+  color:white;
+	font-weight:bold;
+}
+
+li.tab a, li.tab a:link, li.tab a:visited, li.tab span {
+  text-decoration: none;
+  color:white;
+  cursor: pointer;
+  text-shadow: 0px 0px 1px black;
+}
+
+li.activetab a, li.activetab a:link, li.activetab a:visited {
+  text-decoration: none;
+  color:white;
+  text-shadow: 0px 0px 1px black;
+}
+
+/* ------------------ tabbed sub menu --------------------- */
+
+div.submenubox {
+  width: 100%;
+  background-color: #316734;
+  margin:0;
+  border-bottom: 1px solid #316734;
+}
+
+ul.subtabbedmenu{
+  text-align: left;
+  padding: 20px 5px 4px 10%;
+  margin: 0px 0px -1px 0px;
+  border: none;
+  background: #316734;
+  width = 100%;
+}
+
+li.subtab{
+  display: inline;
+  list-style-type: none;
+  padding: 5px 10px;
+  border: 1px solid white;
+  border-bottom:  1px solid white;
+  background: #316734;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  z-index:0;
+  margin: 2px 2px;
+	font-weight:bold;
+}
+
+li.subactivetab{
+  display: inline;
+  list-style-type: none;
+  padding: 5px 10px;
+  border: 1px solid white;
+  border-bottom:  1px solid #316734;
+  background: #316734;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  z-index:11;
+  margin: 2px 2px;
+  color:white;
+	font-weight:bold;
+}
+
+li.subtab a, li.subtab a:link, li.subtab a:visited, li.subtab span {
+  text-decoration: none;
+  color:white;
+  cursor: pointer;
+  text-shadow: 0px 0px 1px black;
+}
+
+li.subactivetab a, li.subactivetab a:link, li.subactivetab a:visited {
+  text-decoration: none;
+  color:white;
+  text-shadow: 0px 0px 1px black;
+}
+
+/* ------------------ Other Schtuff --------------------- */
+
+a.login {
+  color:white;
+}
+
+.link {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.blacklink {
+  background-color: transparent;
+  border: none;
+  color: black;
+  cursor: pointer;
+}
+
+.boldlink {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.blacklink:hover, .link:hover {
+  text-decoration: underline;   
+}
+
+/* ------------------ Autocomplete --------------------- */
+
+.autocomplete-suggestions {
+    text-align: left; cursor: default; border: 1px solid #ccc; border-top: 0; background: #fff; box-shadow: -1px 1px 3px rgba(0,0,0,.1);
+
+    /* core styles should not be changed */
+    position: absolute; display: none; z-index: 9999; max-height: 254px; overflow: hidden; overflow-y: auto; box-sizing: border-box;
+}
+.autocomplete-suggestion { position: relative; padding: 0 .6em; line-height: 23px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 1.02em; color: #333; }
+.autocomplete-suggestion b { font-weight: normal; color: #1f8dd6; }
+.autocomplete-suggestion.selected { background: #f0f0f0; }
+

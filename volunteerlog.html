@@ -1,0 +1,33 @@
+<html>
+ <head>
+    <script src="js/main.js" type="text/javascript"></script>
+    <script src="js/auto-complete.js" type="text/javascript"></script>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+
+  <body>
+    {% set active_page="volunteer" %}
+    {% include "standardheader.html" %}
+    <form id="volunteerlog" onsubmit="return VolunteerSubmit()" action="/submitvolunteer"  method="post">
+      <input type="date" id="date" name="date" class="date" value={{ date }} onChange="FillVisitTD(this.value)" >
+      <input type="hidden" id="householdid" name="householdid"  value={{ household.id }}>
+      <table style="width: 100%;">
+        <tr>
+          <td id="eventcell" class="visitlog">
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <input id="eventsuggest" type="text" name="eventsuggest" placeholder="More events..." style="width:80%;max-width:600px;outline:0">
+          </td>
+        </tr>
+      </table>
+      <button type="submit" form="visitlog" class="submit">Submit</button>
+      
+    </form>
+    <span class='link' onclick='LoadHouseholdFromVisit({{ household.id }})'>Edit Household Information</span>
+    {% include "standardfooter.html" %}
+    
+  </body>
+</html>
