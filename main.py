@@ -1922,7 +1922,7 @@ class VisitLog(webapp2.RequestHandler):
     self.handle()
   
   def handle(self):
-    session = Session(users.get_current_user(), self.request)
+    session = Session(user = users.get_current_user(), request = self.request)
 
     if not session.user and not session.admin:
       self.redirect('/login')
